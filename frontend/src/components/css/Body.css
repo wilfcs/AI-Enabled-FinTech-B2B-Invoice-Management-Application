@@ -1,0 +1,29 @@
+.body-container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+    background-color: #666666;
+}
+.table{
+    width: 90%;
+     background-color: #666666;
+}
+.MuiDataGrid-root,
+.MuiDataGrid-columnHeaderTitle,
+.MuiDataGrid-cellContent,
+.PrivateSwitchBase-input
+.MuiSvgIcon-root
+.MuiDataGrid-selectedRowCount
+.MuiTablePagination-selectLabel
+.css-pdct74-MuiTablePagination-selectLabel {
+    color: white;
+}
+/* .MuiDataGrid-columnHeaderTitle,
+.MuiDataGrid-menuIcon,
+.MuiCheckbox-colorSecondary.Mui-checked,
+.MuiCheckbox-colorSecondary.Mui-checked:hover,
+.MuiCheckbox-colorSecondary.Mui-checked.Mui-focusVisible,
+.MuiCheckbox-colorSecondary:hover {
+    color: white;
+} */
