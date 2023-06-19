@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import * as React from "react";
 import { DataGrid, GridColDef, GridValueGetterParams } from "@mui/x-data-grid";
 import "./css/Body.css"
@@ -59,3 +60,14 @@ const Body = () => {
 };
 
 export default Body;
+=======
+import React from 'react'
+
+const Body = () => {
+  return (
+    <div>Body</div>
+  )
+}
+
+export default Body 
+>>>>>>> 6fe761014b80545aadb34213f739bb763c7bbe44
