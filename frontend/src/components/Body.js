@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { DataGrid, GridColDef, GridValueGetterParams } from "@mui/x-data-grid";
 import "./css/Body.css";
 import Search from "./Search";
+import AdvanceSearch from "./AdvanceSearch";
+import AddDataSection from "./AddDataSection";
 
 const columns: GridColDef[] = [
   { field: "slno", headerName: "SL No.", width: 130 },
@@ -38,10 +40,9 @@ const rows = [
     customerNumber: "Customer-1",
     amountInUsd: 750,
   },
-  // Add more rows here...
   {
-    id: 10,
-    slno: 10,
+    id: 2,
+    slno: 2,
     customerOrderId: "Order-10",
     salesOrg: "SalesOrg-10",
     distributionChannel: "Channel-10",
@@ -56,37 +57,197 @@ const rows = [
 
 
 const Body = () => {
+  // For search
   const [searchQuery, setSearchQuery] = useState("");
+  const [showAdvanceSearch, setShowAdvanceSearch] = useState(false);
+  const [advanceSearchValues, setAdvanceSearchValues] = useState({});
+  const [rowData, setRowData] = useState(rows); // State to store the row data
+  const [showAddData, setShowAddData] = useState(false); // State to control showing the Add Data section
+  const [newRowData, setNewRowData] = useState({
+    slno: "",
+    customerOrderId: "",
+    salesOrg: "",
+    distributionChannel: "",
+    companyCode: "",
+    orderCreationDate: "",
+    orderAmount: "",
+    orderCurrency: "",
+    customerNumber: "",
+    amountInUsd: "",
+  }); // State to store the new row data
 
   const handleSearch = (event) => {
     setSearchQuery(event.target.value);
   };
 
+  // Use Memo after search and advance search is trigerred
   const filteredRows = React.useMemo(() => {
+    let filteredData = rows;
+
+    Object.entries(advanceSearchValues).forEach(([field, value]) => {
+      filteredData = filteredData.filter((row) =>
+        String(row[field]).toLowerCase().includes(value.toLowerCase())
+      );
+    });
+
     const searchTerms = searchQuery.toLowerCase().split(" ");
-    return rows.filter((row) =>
+    filteredData = filteredData.filter((row) =>
       columns.some((column) =>
         searchTerms.some((term) =>
-          String(row[column.field]).toLowerCase().includes(term.toLowerCase())
+          String(row[column.field]).toLowerCase().includes(term)
         )
       )
     );
-  }, [searchQuery]);
+
+    return filteredData;
+  }, [searchQuery, advanceSearchValues]);
+
+  // For advance search
+
+  const handleAdvanceSearch = () => {
+    setShowAdvanceSearch(true);
+  };
+
+  const handleAdvanceSearchCancel = () => {
+    setShowAdvanceSearch(false);
+    setAdvanceSearchValues({});
+  };
+
+  const handleAdvanceSearchSubmit = (values) => {
+    setShowAdvanceSearch(false);
+    setAdvanceSearchValues(values);
+  };
+
+  // For adding new data
+
+  const handleAddDataClick = () => {
+    setShowAddData(true);
+  };
+
+  const handleCancelAddData = () => {
+    setShowAddData(false);
+    setNewRowData({
+      slno: "",
+      customerOrderId: "",
+      salesOrg: "",
+      distributionChannel: "",
+      companyCode: "",
+      orderCreationDate: "",
+      orderAmount: "",
+      orderCurrency: "",
+      customerNumber: "",
+      amountInUsd: "",
+    });
+  };
+
+  const handleNewRowChange = (event) => {
+    const { name, value } = event.target;
+    setNewRowData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+
+    // console.log("new row data ->", newRowData);
+  };
+
+  const handleAddDataSubmit = () => {
+    const newId = rowData.length + 1;
+    const newRow = {
+      id: newId,
+      ...newRowData,
+    };
+
+    // setRowData([...rowData, newRow]);
+    setRowData((prevRowData) => [...prevRowData, newRow]);
+
+    // console.log("this is the updated row data", rowData);
+
+    setShowAddData(false);
+    setNewRowData({
+      slno: "",
+      customerOrderId: "",
+      salesOrg: "",
+      distributionChannel: "",
+      companyCode: "",
+      orderCreationDate: "",
+      orderAmount: "",
+      orderCurrency: "",
+      customerNumber: "",
+      amountInUsd: "",
+    });
+  };
 
   return (
     <div className="body-container">
       <div className="table">
-        <Search onChange={handleSearch} setSearchQuery={setSearchQuery}/>
-        {/* <input type="text" placeholder="Search..." onChange={handleSearch} /> */}
-        <div className="custom-scrollbar-container">
-          <DataGrid
-            rows={filteredRows}
-            columns={columns}
-            pageSize={5}
-            checkboxSelection
-            autoHeight
+        <Search onChange={handleSearch} setSearchQuery={setSearchQuery} />
+
+        <button onClick={handleAdvanceSearch}>Advance Search</button>
+        {showAdvanceSearch && (
+          <div className="overlay">
+            <AdvanceSearch
+              onCancel={handleAdvanceSearchCancel}
+              onSubmit={handleAdvanceSearchSubmit}
+              rows={rows}
+              columns={columns}
+            />
+          </div>
+        )}
+
+        <button onClick={handleAddDataClick}>Add Data</button>
+
+        {showAddData ? (
+          // <div>
+          //   <h3>Add Data</h3>
+          //   <div>
+          //     <label>SL No.:</label>
+          //     <input
+          //       type="text"
+          //       name="slno"
+          //       value={newRowData.slno}
+          //       onChange={handleNewRowChange}
+          //     />
+          //   </div>
+          //   <div>
+          //     <label>Customer Order Id:</label>
+          //     <input
+          //       type="text"
+          //       name="customerOrderId"
+          //       value={newRowData.customerOrderId}
+          //       onChange={handleNewRowChange}
+          //     />
+          //   </div>
+          //   <div>
+          //     <label>Sales Org:</label>
+          //     <input
+          //       type="text"
+          //       name="salesOrg"
+          //       value={newRowData.salesOrg}
+          //       onChange={handleNewRowChange}
+          //     />
+          //   </div>
+
+          //   <button onClick={handleAddDataSubmit}>Submit</button>
+          //   <button onClick={handleCancelAddData}>Cancel</button>
+          // </div>
+
+          <AddDataSection
+            newRowData={newRowData}
+            handleNewRowChange={handleNewRowChange}
+            handleAddDataSubmit={handleAddDataSubmit}
+            handleCancelAddData={handleCancelAddData}
           />
-        </div>
+        ) : (
+          <div className="custom-scrollbar-container">
+            <DataGrid
+              rows={filteredRows}
+              columns={columns}
+              pageSize={5}
+              checkboxSelection
+              autoHeight
+            />
+          </div>
+        )}
       </div>
     </div>
   );
