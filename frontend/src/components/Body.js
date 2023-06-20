@@ -197,40 +197,6 @@ const Body = () => {
         <button onClick={handleAddDataClick}>Add Data</button>
 
         {showAddData ? (
-          // <div>
-          //   <h3>Add Data</h3>
-          //   <div>
-          //     <label>SL No.:</label>
-          //     <input
-          //       type="text"
-          //       name="slno"
-          //       value={newRowData.slno}
-          //       onChange={handleNewRowChange}
-          //     />
-          //   </div>
-          //   <div>
-          //     <label>Customer Order Id:</label>
-          //     <input
-          //       type="text"
-          //       name="customerOrderId"
-          //       value={newRowData.customerOrderId}
-          //       onChange={handleNewRowChange}
-          //     />
-          //   </div>
-          //   <div>
-          //     <label>Sales Org:</label>
-          //     <input
-          //       type="text"
-          //       name="salesOrg"
-          //       value={newRowData.salesOrg}
-          //       onChange={handleNewRowChange}
-          //     />
-          //   </div>
-
-          //   <button onClick={handleAddDataSubmit}>Submit</button>
-          //   <button onClick={handleCancelAddData}>Cancel</button>
-          // </div>
-
           <AddDataSection
             newRowData={newRowData}
             handleNewRowChange={handleNewRowChange}
