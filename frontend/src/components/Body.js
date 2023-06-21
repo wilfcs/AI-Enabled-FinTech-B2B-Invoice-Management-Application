@@ -1,5 +1,10 @@
-import React, { useState } from "react";
-import { DataGrid, GridColDef, GridValueGetterParams } from "@mui/x-data-grid";
+import React, { useState, useEffect } from "react";
+import {
+  DataGrid,
+  GridColDef,
+  GridValueGetterParams,
+} from "@mui/x-data-grid";
+import { GridSelectionModelChangeParams } from "@mui/x-data-grid";
 import "./css/Body.css";
 import Search from "./Search";
 import AdvanceSearch from "./AdvanceSearch";
@@ -75,6 +80,9 @@ const Body = () => {
     customerNumber: "",
     amountInUsd: "",
   }); // State to store the new row data
+
+  const [selectedRows, setSelectedRows] = useState([]); // State to store the selected rows
+  const [isDeleteEnabled, setIsDeleteEnabled] = useState(false); // State to control the delete button
 
   const handleSearch = (event) => {
     setSearchQuery(event.target.value);
@@ -177,6 +185,22 @@ const Body = () => {
     });
   };
 
+  // Function to handle row selection and update selectedRows state
+ const handleRowSelection = (ids) => {
+// const selectedRowsData = ids.map((id) => rows.find((row) => row.id === id));
+setSelectedRows(ids);
+// console.log(selectedRows);
+};
+
+
+  const handleDeleteClick = () => {
+    const updatedRows = rowData.filter((row) => !selectedRows.includes(row.id));
+    setRowData(updatedRows);
+    setSelectedRows([]);
+    console.log("row data", updatedRows);
+  };
+
+
   return (
     <div className="body-container">
       <div className="table">
@@ -196,6 +220,9 @@ const Body = () => {
 
         <button onClick={handleAddDataClick}>Add Data</button>
 
+        {/* Delete Button */}
+        <button onClick={handleDeleteClick}>Delete</button>
+
         {showAddData ? (
           <AddDataSection
             newRowData={newRowData}
@@ -208,9 +235,14 @@ const Body = () => {
             <DataGrid
               rows={filteredRows}
               columns={columns}
-              pageSize={5}
+              initialState={{
+                pagination: {
+                  paginationModel: { page: 0, pageSize: 5 },
+                },
+              }}
+              pageSizeOptions={[5, 10]}
               checkboxSelection
-              autoHeight
+              onRowSelectionModelChange={(ids) => handleRowSelection(ids)}
             />
           </div>
         )}
