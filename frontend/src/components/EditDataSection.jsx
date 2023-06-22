@@ -1,7 +1,20 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
-const EditDataSection = ({ selectedRows, onCancel, onSubmit }) => {
-  const [editedRowData, setEditedRowData] = useState(selectedRows);
+const EditDataSection = ({rows, selectedRows, onCancel, onSubmit }) => {
+ const [editedRowData, setEditedRowData] = useState({});
+  useEffect(() => {
+    // Find the selected row data from the rows array using the selectedRows ID
+    const selectedRow = rows.find((row) => row.id === selectedRows[0]);
+    setEditedRowData(selectedRow);
+  }, [rows, selectedRows]);
+
+   const handleInputChange = (event) => {
+     const { name, value } = event.target;
+     setEditedRowData((prevData) => ({
+       ...prevData,
+       [name]: value,
+     }));
+   };
 
   const handleSubmit = () => {
     console.log("handleSubmit trigerred")
@@ -19,7 +32,7 @@ const EditDataSection = ({ selectedRows, onCancel, onSubmit }) => {
             type="text"
             name="Order Currency:"
             value={editedRowData.orderCurrency}
-            // onChange={handleInputChange}
+            onChange={handleInputChange}
           />
         </label>
         <label>
@@ -28,7 +41,7 @@ const EditDataSection = ({ selectedRows, onCancel, onSubmit }) => {
             type="text"
             name="Company Code:"
             value={editedRowData.companyCode}
-            // onChange={handleInputChange}
+            onChange={handleInputChange}
           />
         </label>
         <label>
@@ -37,7 +50,7 @@ const EditDataSection = ({ selectedRows, onCancel, onSubmit }) => {
             type="text"
             name="Distribution Channel:"
             value={editedRowData.distributionChannel}
-            // onChange={handleInputChange}
+            onChange={handleInputChange}
           />
         </label>
         <div className="edit-popup-buttons">

@@ -260,6 +260,7 @@ setSelectedRows(ids);
         {showEditPopup && selectedRows.length===1 ? (
           <div className="overlay">
             <EditDataSection
+            rows={rows}
               selectedRows={selectedRows}
               onCancel={() => setShowEditPopup(false)}
               onSubmit={(editedRows) => {
