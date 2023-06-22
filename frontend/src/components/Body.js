@@ -9,6 +9,7 @@ import "./css/Body.css";
 import Search from "./Search";
 import AdvanceSearch from "./AdvanceSearch";
 import AddDataSection from "./AddDataSection";
+import EditDataSection from "./EditDataSection";
 
 const columns: GridColDef[] = [
   { field: "slno", headerName: "SL No.", width: 130 },
@@ -83,6 +84,8 @@ const Body = () => {
 
   const [selectedRows, setSelectedRows] = useState([]); // State to store the selected rows
   const [isDeleteEnabled, setIsDeleteEnabled] = useState(false); // State to control the delete button
+
+  const [showEditPopup, setShowEditPopup] = useState(false); // State to show or hide edit popup
 
   const handleSearch = (event) => {
     setSearchQuery(event.target.value);
@@ -200,6 +203,10 @@ setSelectedRows(ids);
     console.log("row data", updatedRows);
   };
 
+  // Function to edit data
+    const handleEditClick = () => {
+    setShowEditPopup(true);
+  };
 
   return (
     <div className="body-container">
@@ -222,6 +229,9 @@ setSelectedRows(ids);
 
         {/* Delete Button */}
         <button onClick={handleDeleteClick}>Delete</button>
+
+        {/* Edit Button */}
+        <button onClick={handleEditClick}>Edit</button>
 
         {showAddData ? (
           <AddDataSection
@@ -246,6 +256,20 @@ setSelectedRows(ids);
             />
           </div>
         )}
+
+        {showEditPopup && selectedRows.length===1 ? (
+          <div className="overlay">
+            <EditDataSection
+              selectedRows={selectedRows}
+              onCancel={() => setShowEditPopup(false)}
+              onSubmit={(editedRows) => {
+                // Handle the edited rows data here
+                console.log("edit trigerred");
+                setShowEditPopup(false);
+              }}
+            />
+          </div>
+        ): null}
       </div>
     </div>
   );

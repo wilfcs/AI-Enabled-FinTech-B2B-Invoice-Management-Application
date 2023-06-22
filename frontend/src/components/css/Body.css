@@ -12,11 +12,14 @@
 .MuiDataGrid-root,
 .MuiDataGrid-columnHeaderTitle,
 .MuiDataGrid-cellContent,
-.PrivateSwitchBase-input
-.MuiSvgIcon-root
-.MuiDataGrid-selectedRowCount
-.MuiTablePagination-selectLabel
-.css-pdct74-MuiTablePagination-selectLabel {
+.PrivateSwitchBase-input,
+.MuiSvgIcon-root,
+.MuiDataGrid-selectedRowCount,
+.MuiTablePagination-selectLabel,
+.css-pdct74-MuiTablePagination-selectLabel,
+.MuiTablePagination-displayedRows,
+.MuiInputBase-root,
+.MuiTablePagination-select {
     color: white;
 }
 /* .MuiDataGrid-columnHeaderTitle,
