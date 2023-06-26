@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 
 const Search = ({ onChange, setSearchQuery }) => {
   return (
     <div>
-      <input type="text" placeholder="Search..." onChange={onChange} />
+      <input type="text" placeholder="Search Customer Order ID" onChange={onChange} className='search-box'/>
     </div>
   );
 };

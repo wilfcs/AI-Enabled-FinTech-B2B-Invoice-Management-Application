@@ -5,105 +5,116 @@ const AddDataSection = ({
   handleNewRowChange,
   handleAddDataSubmit,
   handleCancelAddData,
+  setShowTableView,
 }) => {
   return (
-    <div>
-      <h3>Add Data</h3>
-      <div>
-        <label>SL No.:</label>
-        <input
-          type="text"
-          name="slno"
-          value={newRowData.slno}
-          onChange={handleNewRowChange}
-        />
+    <div className="addDataSection">
+      <div className="addDataSection-grid">
+        {/* input data */}
+        <div>
+          <input
+            type="text"
+            name="Sl_No"
+            placeholder="SL No."
+            value={newRowData.Sl_No}
+            onChange={handleNewRowChange}
+          />
+        </div>
+        <div>
+          <input
+            type="text"
+            name="Customer_Order_Id"
+            placeholder="Customer Order Id"
+            value={newRowData.Customer_Order_Id}
+            onChange={handleNewRowChange}
+          />
+        </div>
+        <div>
+          <input
+            type="text"
+            name="Sales_Org"
+            placeholder="Sales Org"
+            value={newRowData.Sales_Org}
+            onChange={handleNewRowChange}
+          />
+        </div>
+        <div>
+          <input
+            type="text"
+            name="Distribution_Channel"
+            placeholder="Distribution Channel"
+            value={newRowData.Distribution_Channel}
+            onChange={handleNewRowChange}
+          />
+        </div>
+        <div>
+          <input
+            type="text"
+            name="Company_Code"
+            placeholder="Company Code"
+            value={newRowData.Company_Code}
+            onChange={handleNewRowChange}
+          />
+        </div>
       </div>
-      <div>
-        <label>Customer Order Id:</label>
-        <input
-          type="text"
-          name="customerOrderId"
-          value={newRowData.customerOrderId}
-          onChange={handleNewRowChange}
-        />
+      <div className="addDataSection-grid">
+        <div>
+          <input
+            type="text"
+            name="Order_Creation_Date"
+            placeholder="Order Creation Date"
+            value={newRowData.Order_Creation_Date}
+            onChange={handleNewRowChange}
+          />
+        </div>
+        <div>
+          <input
+            type="text"
+            name="Order_Amount"
+            placeholder="Order Amount"
+            value={newRowData.Order_Amount}
+            onChange={handleNewRowChange}
+          />
+        </div>
+        <div>
+          <input
+            type="text"
+            name="Order_Currency"
+            placeholder="Order Currency"
+            value={newRowData.Order_Currency}
+            onChange={handleNewRowChange}
+          />
+        </div>
+        <div>
+          <input
+            type="text"
+            name="Customer_Number"
+            placeholder="Customer Number"
+            value={newRowData.Customer_Number}
+            onChange={handleNewRowChange}
+          />
+        </div>
+        <div>
+          <input
+            type="text"
+            name="Amount_in_USD"
+            placeholder="Amount in USD"
+            value={newRowData.Amount_in_USD}
+            onChange={handleNewRowChange}
+          />
+        </div>
       </div>
-      <div>
-        <label>Sales Org:</label>
-        <input
-          type="text"
-          name="salesOrg"
-          value={newRowData.salesOrg}
-          onChange={handleNewRowChange}
-        />
+
+      <div className="addDataSectionButtons">
+        {/* Submit button */}
+        <button onClick={handleAddDataSubmit} className="addDataSectionSubmit">
+          Submit
+        </button>
+        {/* Cancel button */}
+        <button onClick={handleCancelAddData} className="addDataSectionCancel">
+          Cancel
+        </button>
       </div>
-      {/* slno: "", customerOrderId: "", salesOrg: "", distributionChannel: "",
-      companyCode: "", orderCreationDate: "", orderAmount: "", orderCurrency:
-      "", customerNumber: "", amountInUsd: "", */}
-      <div>
-        <label>Distribution Channel</label>
-        <input
-          type="text"
-          name="distributionChannel"
-          value={newRowData.distributionChannel}
-          onChange={handleNewRowChange}
-        />
-      </div>
-      <div>
-        <label>Company Code</label>
-        <input
-          type="text"
-          name="companyCode"
-          value={newRowData.companyCode}
-          onChange={handleNewRowChange}
-        />
-      </div>
-      <div>
-        <label>Order Creation Date</label>
-        <input
-          type="text"
-          name="orderCreationDate"
-          value={newRowData.orderCreationDate}
-          onChange={handleNewRowChange}
-        />
-      </div>
-      <div>
-        <label>Order Amount</label>
-        <input
-          type="text"
-          name="orderAmount"
-          value={newRowData.orderAmount}
-          onChange={handleNewRowChange}
-        />
-      </div>
-      <div>
-        <label>Order Currency</label>
-        <input
-          type="text"
-          name="orderCurrency"
-          value={newRowData.orderCurrency}
-          onChange={handleNewRowChange}
-        />
-      </div>
-      <div>
-        <label>Customer Number</label>
-        <input
-          type="text"
-          name="customerNumber"
-          value={newRowData.customerNumber}
-          onChange={handleNewRowChange}
-        />
-      </div>
-      <div>
-        <label>Amount in USD</label>
-        <input
-          type="text"
-          name="amountInUsd"
-          value={newRowData.amountInUsd}
-          onChange={handleNewRowChange}
-        />
-      </div>
-      <button onClick={handleAddDataSubmit}>Submit</button>
-      <button onClick={handleCancelAddData}>Cancel</button>
     </div>
   );
 };
