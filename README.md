@@ -1,5 +1,5 @@
 # AI-Enabled-FinTech-B2B-Invoice-Management-Application
 **DEMO VIDEO**
-<iframe width="560" height="315" src="https://www.youtube.com/embed/S5H6F0LAQpc" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+https://github.com/himanshu070/AI-Enabled-FinTech-B2B-Invoice-Management-Application/assets/66140981/b9be78f3-76d6-4f4f-9263-6dd9cdf894a0
 
 
