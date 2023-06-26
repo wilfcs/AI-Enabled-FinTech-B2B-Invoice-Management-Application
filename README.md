@@ -47,7 +47,7 @@ To accomplish the above objectives, the following steps were taken:
 
 ## Contact 
 
-For any inquiries or further information, please contact our team at mishrahimanshu070@gmail.com.
+For any inquiries or further information, please contact me at mishrahimanshu070@gmail.com.
 
 Enjoy using the AI-Enabled FinTech B2B Invoice Management Application!
 
