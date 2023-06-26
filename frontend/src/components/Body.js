@@ -268,21 +268,7 @@ const Body = () => {
   }, []);
 
  const handlePredictButton = () => {
-   const updatedRows = rowData.map((row) => {
-     if (selectedRows.includes(row.id)) {
-       // Generate a random order amount between 500.00 and 1500.00
-       const randomAmount = (Math.random() * 1000 + 500).toFixed(2);
-
-       return {
-         ...row,
-         Order_Amount: randomAmount,
-       };
-     }
-     return row;
-   });
-
-   setRowData(updatedRows);
-   setSelectedRows([]);
+  
  };
 
 
