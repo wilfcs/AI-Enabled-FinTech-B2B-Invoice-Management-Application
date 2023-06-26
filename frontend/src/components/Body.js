@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { DataGrid, GridToolbar } from "@mui/x-data-grid";
+import { DataGrid } from "@mui/x-data-grid";
 import axios from "axios";
 import "./css/Body.css";
 import Search from "./Search";
@@ -71,7 +71,7 @@ const Body = () => {
   }); // State to store the new row data
 
   const [selectedRows, setSelectedRows] = useState([]); // State to store the selected rows
-  const [isDeleteEnabled, setIsDeleteEnabled] = useState(false); // State to control the delete button
+  // const [isDeleteEnabled, setIsDeleteEnabled] = useState(false); // State to control the delete button
 
   const [showEditPopup, setShowEditPopup] = useState(false); // State to show or hide edit popup
 
@@ -267,6 +267,25 @@ const Body = () => {
     fetchData();
   }, []);
 
+ const handlePredictButton = () => {
+   const updatedRows = rowData.map((row) => {
+     if (selectedRows.includes(row.id)) {
+       // Generate a random order amount between 500.00 and 1500.00
+       const randomAmount = (Math.random() * 1000 + 500).toFixed(2);
+
+       return {
+         ...row,
+         Order_Amount: randomAmount,
+       };
+     }
+     return row;
+   });
+
+   setRowData(updatedRows);
+   setSelectedRows([]);
+ };
+
+
   return (
     <div className="body-container">
       <div className="body-topdiv">
@@ -378,6 +397,7 @@ const Body = () => {
             className={`predictButton ${
               selectedRows.length !== 1 ? "disabled" : null
             }`}
+            onClick={handlePredictButton}
           >
             Predict
           </button>
